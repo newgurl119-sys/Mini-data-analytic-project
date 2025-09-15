@@ -1,0 +1,20 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+data = pd.read_csv("students.csv")
+
+# Average marks per subject
+print("Average Marks by Subject:\n", data.mean(numeric_only=True))
+
+# Add total score
+data["Total"] = data[["Math","Science","English"]].sum(axis=1)
+
+# Top student
+topper = data.loc[data["Total"].idxmax()]["Name"]
+print("\nTop Student:", topper)
+
+# Plot subject averages
+data[["Math","Science","English"]].mean().plot(kind="bar", title="Average Subject Scores", color=["skyblue","orange","green"])
+plt.ylabel("Marks")
+plt.show()
